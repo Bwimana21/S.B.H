@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE STONE BOUTIQUE MOTEL</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #231F20;
+    --white: #FFFFFF;
+    --cream: #F5F2EC;
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --charcoal: #2C2A2B;
+    --muted: #7A7674;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(35,31,32,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('/mnt/user-data/uploads/back_ground.jpg');
+    background-size: cover; background-position: center;
+    filter: brightness(0.45);
+    transform: scale(1.05);
+    animation: slowZoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes slowZoom {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1.12); }
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(35,31,32,0.3) 0%, rgba(35,31,32,0.15) 50%, rgba(35,31,32,0.8) 100%);
+  }
+
+  .hero-content {
+    position: relative; text-align: center;
+    animation: fadeUp 1.4s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.6rem; letter-spacing: 0.5em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300; line-height: 0.9;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    font-weight: 300; letter-spacing: 0.6em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+
+  .hero-divider {
+    width: 60px; height: 1px;
+    background: var(--gold);
+    margin: 0 auto 3rem;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border: 1px solid var(--gold);
+    font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--white); text-decoration: none;
+    transition: all 0.4s;
+    background: transparent;
+  }
+  .hero-cta:hover {
+    background: var(--gold);
+    color: var(--black);
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    animation: bounce 2s ease infinite;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 7rem 4rem; }
+
+  .section-eyebrow {
+    font-size: 0.58rem; letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-eyebrow::before, .section-eyebrow::after {
+    content: ''; flex: 0 0 30px; height: 1px; background: var(--gold);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    font-size: 0.82rem; line-height: 1.9;
+    color: rgba(255,255,255,0.65);
+    max-width: 55ch;
+    font-weight: 300;
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    background: var(--black);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-frame {
+    width: 100%; aspect-ratio: 3/4;
+    background: var(--charcoal);
+    border: 1px solid rgba(201,168,76,0.3);
+    position: relative; overflow: hidden;
+  }
+
+  .about-frame-bg {
+    position: absolute; inset: 0;
+    background-image: url('/mnt/user-data/uploads/back_ground.jpg');
+    background-size: cover; background-position: center top;
+    filter: brightness(0.6) saturate(0.8);
+  }
+
+  .about-frame-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(35,31,32,0.6) 0%, transparent 100%);
+  }
+
+  .about-accent {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    width: 60%; aspect-ratio: 1;
+    border: 1px solid rgba(201,168,76,0.4);
+    pointer-events: none;
+  }
+
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; margin-top: 3rem;
+  }
+
+  .stat {
+    padding: 1.5rem;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.5rem; font-weight: 300;
+    color: var(--gold); line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-top: 0.4rem;
+  }
+
+  /* ─── MENU ─── */
+  .menu-section {
+    background: #1A1718;
+    padding: 7rem 4rem;
+  }
+
+  .menu-inner { max-width: 1200px; margin: 0 auto; }
+
+  .menu-header { text-align: center; margin-bottom: 5rem; }
+
+  .menu-tabs {
+    display: flex; justify-content: center; gap: 0;
+    margin-bottom: 4rem;
+    border: 1px solid rgba(201,168,76,0.3);
+    max-width: 500px; margin-left: auto; margin-right: auto;
+    margin-bottom: 4rem;
+  }
+
+  .tab-btn {
+    flex: 1; padding: 1rem 2rem;
+    background: transparent; border: none;
+    font-family: var(--font-body);
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer; transition: all 0.3s;
+    border-right: 1px solid rgba(201,168,76,0.3);
+  }
+  .tab-btn:last-child { border-right: none; }
+  .tab-btn.active {
+    background: var(--gold);
+    color: var(--black);
+  }
+  .tab-btn:not(.active):hover { color: var(--gold); }
+
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; }
+
+  .menu-category { margin-bottom: 3.5rem; }
+
+  .cat-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem; font-weight: 400;
+    color: var(--gold-light);
+    letter-spacing: 0.15em;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0;
+  }
+
+  .menu-item {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    gap: 1rem;
+  }
+
+  .item-info { flex: 1; }
+
+  .item-name {
+    font-size: 0.8rem; font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0.2rem;
+  }
+
+  .item-desc {
+    font-size: 0.65rem; font-weight: 300;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .item-price {
+    font-family: var(--font-display);
+    font-size: 1rem; font-weight: 400;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* drinks two-col price */
+  .item-price-pair {
+    display: flex; gap: 1rem; align-items: baseline;
+  }
+  .price-label {
+    font-size: 0.55rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: rgba(255,255,255,0.35);
+  }
+
+  /* ─── DIVIDER BAND ─── */
+  .band {
+    padding: 5rem 4rem;
+    background: var(--gold);
+    text-align: center;
+  }
+  .band-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 300; font-style: italic;
+    color: var(--black);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0E0C0D;
+    padding: 4rem 4rem 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem; font-weight: 300; letter-spacing: 0.2em;
+    color: var(--white); margin-bottom: 1rem;
+  }
+  .footer-brand-name span { color: var(--gold); }
+
+  .footer-desc {
+    font-size: 0.72rem; line-height: 1.8;
+    color: rgba(255,255,255,0.45); font-weight: 300;
+    max-width: 30ch;
+  }
+
+  .footer-col-title {
+    font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.7rem; }
+  .footer-links a {
+    font-size: 0.72rem; color: rgba(255,255,255,0.5);
+    text-decoration: none; transition: color 0.3s; font-weight: 300;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    max-width: 1200px; margin: 2rem auto 0;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 0.62rem; color: rgba(255,255,255,0.3); font-weight: 300;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-size: 0.8rem; font-style: italic;
+    color: rgba(201,168,76,0.5);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 2rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-accent { display: none; }
+    .menu-section { padding: 5rem 2rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .band { padding: 3rem 2rem; }
+    footer { padding: 3rem 2rem 1.5rem; }
+  }
+
+  /* ─── FADE IN OBSERVER ─── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">THE <span>ST</span>ONE</a>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Kigali · Rwanda</p>
+    <h1 class="hero-title">THE STONE</h1>
+    <p class="hero-subtitle">Boutique Motel</p>
+    <div class="hero-divider"></div>
+    <a href="#about" class="hero-cta">Discover More</a>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:#231F20; padding: 7rem 4rem;">
+  <div class="about">
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <div class="about-frame-bg"></div>
+        <div class="about-frame-overlay"></div>
+      </div>
+      <div class="about-accent"></div>
+    </div>
+    <div class="about-text reveal">
+      <p class="section-eyebrow">Our Foundation</p>
+      <h2 class="section-title">Luxury Rooted<br>in Authenticity</h2>
+      <p class="section-body" style="margin-bottom:1.5rem;">
+        THE STONE BOUTIQUE MOTEL was born from a vision — to create a sanctuary where the warmth of Rwandan hospitality meets the elegance of refined luxury. Nestled in the heart of Kigali, every stone, every detail tells a story.
+      </p>
+      <p class="section-body" style="margin-bottom:1.5rem;">
+        We believe that true hospitality transcends mere accommodation. It is an experience — one that envelops guests in comfort, culture, and the unmistakable spirit of Rwanda. From our hand-crafted interiors to our curated culinary offerings, every element has been designed with intention.
+      </p>
+      <p class="section-body">
+        Our name carries weight. Stone endures. Stone grounds. Stone forms the very foundation upon which great things are built. We are that foundation for your Kigali experience — offering accommodation, fine dining, a coffee shop, and a bar, all under one distinguished roof.
+      </p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Distinct Venues</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Memorable Moments</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Rwandan Heart</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Unforgettable Stay</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOLD BAND -->
+<div class="band">
+  <p class="band-text">"Where every guest is a story waiting to be written."</p>
+</div>
+
+<!-- MENU -->
+<section id="menu" class="menu-section">
+  <div class="menu-inner">
+    <div class="menu-header reveal">
+      <p class="section-eyebrow" style="justify-content:center;">Culinary Experience</p>
+      <h2 class="section-title" style="text-align:center;">Our Menu</h2>
+      <p class="section-body" style="text-align:center; margin: 0 auto;">
+        A celebration of flavours — from local Rwandan classics to internationally inspired dishes. All prices in Rwandan Franc.
+      </p>
+    </div>
+
+    <div class="menu-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab('food')">Food Menu</button>
+      <button class="tab-btn" onclick="switchTab('drinks')">Drinks Menu</button>
+    </div>
+
+    <!-- FOOD PANEL -->
+    <div class="menu-panel active" id="panel-food">
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Small Plates &amp; Salads</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Avocado Salad</div><div class="item-desc">Avocado, Lettuces, Tomatoes and Onion</div></div><div class="item-price">6,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Chef Salad</div><div class="item-desc">Chicken strips, Cheese, Boiled Egg, Lettuce, Carrot, Tomatoes, Cucumber, Vinaigrette</div></div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Mixed Salad</div><div class="item-desc">Lettuces, Tomatoes, Carrot, Cucumber and Onion</div></div><div class="item-price">6,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">The Stone Boutique Motel Salad</div><div class="item-desc">Ham, Cheese, Egg, Black Olive and Onion</div></div><div class="item-price">8,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Kachumbari Salad</div><div class="item-desc">Tomatoes, Carrot, Onion, Chilli and Green Pepper</div></div><div class="item-price">5,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Soup Dishes</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-name">Vegetable Soup</div><div class="item-price">5,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Mushroom Soup</div><div class="item-price">6,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Fish Soup</div><div class="item-price">6,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Chicken Soup</div><div class="item-price">6,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Boiled Dishes</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Whole Chicken</div><div class="item-desc">Boiled Chicken, Potatoes or Banana, Mirepoix and Tomatoes</div></div><div class="item-price">25,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Half Chicken</div><div class="item-desc">Boiled Chicken, Potatoes or Bananas, Mirepoix and Tomatoes</div></div><div class="item-price">15,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Beef (T-bone)</div><div class="item-desc">Boiled T-bone Beef, Banana or Potato, Mirepoix and Tomatoes</div></div><div class="item-price">25,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Whole Fish</div><div class="item-desc">Boiled Whole Fish, Potatoes or Banana, Mirepoix and Tomatoes</div></div><div class="item-price">25,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Agatogo</div><div class="item-desc">Boiled Plantains simmered with seasoning and tender meat</div></div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Igisafuriya</div><div class="item-desc">Boiled Chicken/Goat, Potatoes or Banana, Local Greens and Peanut</div></div><div class="item-price">25,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Main Dishes</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">¼ Chicken Massala</div><div class="item-desc">Boneless Chicken in masala sauce, Rice or Chips and Vegetables</div></div><div class="item-price">12,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">¼ Chicken Curry</div><div class="item-desc">Boneless Chicken in curry sauce, Rice or Chips and Vegetables</div></div><div class="item-price">12,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Steak Medallion</div><div class="item-desc">Sliced marinated Beef Steak, Rice or Chips and Vegetables</div></div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Pepper Steak</div><div class="item-desc">Fried Beef Steak with crushed peppercorn, Rice or Chips and Vegetables</div></div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Rwanda Goat Stew</div><div class="item-desc">Tender Goat simmered in Goat broth with Potatoes, Carrots and Onions</div></div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Beef Stroganoff</div><div class="item-desc">Sliced Beef with Mushroom butter and milk/red sauce, Rice and mixed Vegetables</div></div><div class="item-price">12,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Chicken Stroganoff</div><div class="item-desc">Sliced Chicken with Mushroom butter and milk/red sauce, Rice or Chips and Vegetables</div></div><div class="item-price">12,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Beef Stew</div><div class="item-desc">Tender Beef simmered in broth with Potatoes, Carrot and Onion</div></div><div class="item-price">8,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Fried Tilapia Fillet</div><div class="item-desc">Coated Tilapia fillet deep fried, Rice or Chips and mixed Vegetables</div></div><div class="item-price">12,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Captain Fish Fillet</div><div class="item-desc">Coated Captain Fish in olive oil, Rice or Chips and mixed Vegetables</div></div><div class="item-price">12,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Captain Fish Baked in Foil</div><div class="item-desc">Comes with side dish of your choice</div></div><div class="item-price">12,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Ugali with Meat Sauce</div><div class="item-desc">Maize / Cassava Ugali</div></div><div class="item-price">8,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Burgers</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Beef Burger</div><div class="item-desc">Burger bun, minced Meat and Bread crumbs</div></div><div class="item-price">8,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Cheese Burger</div><div class="item-desc">Burger bun, minced Beef, Egg, Bread crumbs and Cheese</div></div><div class="item-price">8,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Chicken Burger</div><div class="item-desc">Burger bun, minced Chicken and Bread crumbles</div></div><div class="item-price">8,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">The Stone Boutique Burger</div><div class="item-desc">Burger bun, minced Beef, Fried Egg, Bread crumbs and Cheese</div></div><div class="item-price">8,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Vegetarian Burger</div><div class="item-price">6,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Pizza</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">The Stone Boutique Pizza</div><div class="item-desc">Beef sausage, Oregano Mushroom, Ham, Cheese, Tomatoes and Green Olive</div></div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Hawaiian Pizza</div><div class="item-desc">Tomatoes, Cheese, Pineapple and Ham</div></div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Verdure Pizza</div><div class="item-desc">Tomatoes, Ham, Cheese, Mushroom, Onion and Oregano</div></div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Chicken Pizza</div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Four Season Pizza</div><div class="item-desc">Chicken, Onion, Tomatoes and Cheese</div></div><div class="item-price">10,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Margarita Pizza</div><div class="item-price">10,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Sandwiches</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Vegetable Sandwich</div><div class="item-desc">Lettuce, Tomatoes, Onion, Toasted bread and Chips</div></div><div class="item-price">7,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Ham Sandwich</div><div class="item-desc">Ham, Tomatoes, Lettuce, Toasted bread and Chips</div></div><div class="item-price">8,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">The Stone Boutique Sandwich</div><div class="item-desc">Ham, Omelette, Cheese, Toasted bread with Chips</div></div><div class="item-price">8,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Omelettes</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Special Omelette</div><div class="item-desc">Ham, Sausage, Cheese and Chips</div></div><div class="item-price">7,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Spanish Omelette</div><div class="item-desc">Onion, Green Pepper and Tomatoes</div></div><div class="item-price">4,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Plain Omelette</div><div class="item-price">3,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Tomatoes &amp; Onions Omelette</div><div class="item-price">3,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Ham &amp; Cheese Omelette</div><div class="item-price">5,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Barbecue</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-name">Whole Chicken BBQ</div><div class="item-price">20,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Half Chicken BBQ</div><div class="item-price">12,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Whole Fish Tilapia BBQ</div><div class="item-price">20,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Beef Brochette</div><div class="item-price">4,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Chicken Brochette</div><div class="item-price">4,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Fish Brochette</div><div class="item-price">4,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Goat Brochette</div><div class="item-price">2,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Zingaro</div><div class="item-price">3,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Nyama Choma – Goat Leg</div><div class="item-price">25,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Nyama Choma – Goat Arms</div><div class="item-price">20,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Nyama Choma – Goat Ribs</div><div class="item-price">25,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Umugongo – Goat's Back</div><div class="item-price">25,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Side Dishes</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-name">French Fries</div><div class="item-price">3,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Banana Chips</div><div class="item-price">3,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Plain Rice</div><div class="item-price">3,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Boiled Potato</div><div class="item-price">3,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Pilaou Rice</div><div class="item-price">5,000 FRW</div></div>
+          <div class="menu-item"><div class="item-name">Pomme Sauté</div><div class="item-price">5,000 FRW</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Desserts</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Crêpe Suzette</div><div class="item-desc">Flour, Milk, Sugar, Butter, Egg and Vanilla</div></div><div class="item-price">4,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Banana Fritter</div><div class="item-desc">Fried Banana, Flour, Egg, Sugar</div></div><div class="item-price">4,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Fruit Salad</div><div class="item-desc">A mix of seasonal fresh-cut fruits</div></div><div class="item-price">7,000 FRW</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Pan Cake</div><div class="item-desc">Flour, Milk, Egg, Sugar, Vanilla, Lemon zest, Butter and Baking powder</div></div><div class="item-price">6,000 FRW</div></div>
+        </div>
+      </div>
+
+    </div><!-- /food panel -->
+
+    <!-- DRINKS PANEL -->
+    <div class="menu-panel" id="panel-drinks">
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Soft Drinks</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-name">Red Bull</div><div class="item-price">5,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Skol Panache</div><div class="item-price">1,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Inyange Still Water 500ml</div><div class="item-price">1,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Virunga Sparkling Water</div><div class="item-price">1,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Fanta</div><div class="item-price">1,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Fanta Plastic Bottle</div><div class="item-price">2,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Bavaria Apple Zero Alc</div><div class="item-price">3,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Bavaria Original Zero Alc</div><div class="item-price">3,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Inyange Juice</div><div class="item-price">2,000 RWF</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Fresh Juices</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-name">Mango Juice</div><div class="item-price">6,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Passion Juice</div><div class="item-price">7,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Watermelon Juice</div><div class="item-price">6,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Pineapple Juice</div><div class="item-price">6,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Tree Tomato</div><div class="item-price">6,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Mocktail Juice</div><div class="item-price">7,000 RWF</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Milkshakes</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-name">Vanilla Milkshake</div><div class="item-price">10,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Strawberry Milkshake</div><div class="item-price">10,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Chocolate Milkshake</div><div class="item-price">10,000 RWF</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Hot Beverages</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-name">Black Tea</div><div class="item-price">3,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">African Tea</div><div class="item-price">3,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Spiced Tea</div><div class="item-price">4,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Ginger Tea</div><div class="item-price">3,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Green Tea</div><div class="item-price">3,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Lemon Tea</div><div class="item-price">3,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Black Coffee</div><div class="item-price">4,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Espresso Double</div><div class="item-price">5,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Cappuccino</div><div class="item-price">5,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Caffè Latte</div><div class="item-price">5,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Macchiato</div><div class="item-price">2,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Caffè Mocha</div><div class="item-price">5,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Hot Chocolate</div><div class="item-price">5,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Hot Milk</div><div class="item-price">3,000 RWF</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Beer</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-name">Heineken</div><div class="item-price">2,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Heineken Zero</div><div class="item-price">2,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Amstel</div><div class="item-price">2,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Mutzig</div><div class="item-price">2,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Virunga Mist / Silver / Gold</div><div class="item-price">2,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Skol Malt / Lager / 5</div><div class="item-price">2,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Skol Canette</div><div class="item-price">5,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Tusker Malt / Lite</div><div class="item-price">2,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Tusker Lager</div><div class="item-price">3,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Guinness</div><div class="item-price">3,500 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Leffe / Corona / Desperados</div><div class="item-price">5,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Savanna / Guarana / Stella / Exo</div><div class="item-price">5,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Smirnoff Ice</div><div class="item-price">4,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Goldberg</div><div class="item-price">3,000 RWF</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Aperitifs</h3>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="item-info"><div class="item-name">Martini Bianco</div></div>
+            <div class="item-price-pair">
+              <div><div class="price-label">Glass</div><div class="item-price">15,000 RWF</div></div>
+              <div><div class="price-label">Bottle</div><div class="item-price">60,000 RWF</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Liqueurs</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Amarula</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">15,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">60,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Baileys</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">15,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">60,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Cointreau</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">5,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">120,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Grand Marnier</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">5,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">120,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Jägermeister</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">4,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">80,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Malibu</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">3,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">80,000 RWF</div></div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Cognac</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Hennessy VSOP</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">8,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">250,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Hennessy VS</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">6,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">180,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Martel VSOP</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">10,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">280,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Rémy Martin VSOP</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">8,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">250,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Courvoisier VSOP</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">8,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">230,000 RWF</div></div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Whisky</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Jameson Irish</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">3,500 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">80,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Red Label</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">3,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">50,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Black Label</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">4,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">120,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Double Black</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">5,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">140,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Green Label</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">10,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">180,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Jack Daniel's</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">4,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">100,000 RWF</div></div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Gin</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Hendrick's</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">5,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">150,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Beefeater 1000ml</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">3,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">60,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Gordon's</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">3,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">50,000 RWF</div></div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Vodka &amp; Tequila</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Absolut Vodka</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">3,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">70,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Smirnoff Vodka</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">3,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">60,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Olmeca Silver Tequila</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">4,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">100,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Camino Tequila</div></div><div class="item-price-pair"><div><div class="price-label">Shot</div><div class="item-price">3,000 RWF</div></div><div><div class="price-label">Bottle</div><div class="item-price">60,000 RWF</div></div></div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Champagne &amp; Sparkling Wine</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-name">Veuve Clicquot Brut</div><div class="item-price">250,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Moët &amp; Chandon</div><div class="item-price">220,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Canetelli Prosecco</div><div class="item-price">40,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Freixenet Premium Cava Brut</div><div class="item-price">50,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Baron D'Arignac Brut / Demi-Sec</div><div class="item-price">30,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">JP Chenet Ice</div><div class="item-price">40,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Caprice Zero Alc</div><div class="item-price">30,000 RWF</div></div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <h3 class="cat-title">White &amp; Red Wine</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="item-info"><div class="item-name">Pinta Negra Box</div><div class="item-desc">White or Red</div></div><div class="item-price-pair"><div><div class="price-label">Glass</div><div class="item-price">7,000 RWF</div></div><div><div class="price-label">Box</div><div class="item-price">15,000 RWF</div></div></div></div>
+          <div class="menu-item"><div class="item-name">Baron D'Arignac (White / Red)</div><div class="item-price">25,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Four Cousins (White / Red)</div><div class="item-price">30,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Nederburg Merlot</div><div class="item-price">35,000 RWF</div></div>
+          <div class="menu-item"><div class="item-name">Villa Blanche Red</div><div class="item-price">35,000 RWF</div></div>
+          <div class="menu-item"><div class="item-info"><div class="item-name">Drostdy Hof Medium Box</div></div><div class="item-price-pair"><div><div class="price-label">Glass</div><div class="item-price">7,000 RWF</div></div><div><div class="price-label">Box</div><div class="item-price">15,000 RWF</div></div></div></div>
+        </div>
+      </div>
+
+    </div><!-- /drinks panel -->
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">THE <span>ST</span>ONE</div>
+      <p class="footer-desc">
+        Luxury Boutique Motel in Kigali, Rwanda. Where the warmth of Rwandan hospitality meets refined elegance. Accommodation, Restaurant, Coffee Shop &amp; Bar.
+      </p>
+    </div>
+    <div>
+      <p class="footer-col-title">Navigate</p>
+      <ul class="footer-links">
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#menu">Food Menu</a></li>
+        <li><a href="#menu">Drinks Menu</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contact</p>
+      <ul class="footer-links">
+        <li><a href="#">Kigali, Rwanda</a></li>
+        <li><a href="#">info@thestoneboutiquehotel.com</a></li>
+        <li><a href="#">+250 780 492 578</a></li>
+        <li><a href="#">www.thestoneboutiquehotel.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 THE STONE BOUTIQUE MOTEL · All rights reserved</p>
+    <p class="footer-tagline">Luxury and Comfort</p>
+  </div>
+</footer>
+
+<script>
+function switchTab(type) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-' + type).classList.add('active');
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
